@@ -36,7 +36,6 @@ const App = () => {
       });
 
       setStream(currentStream);
-
       myVideo.current.srcObject = currentStream;
     } catch (error) {
       console.log(error);
@@ -117,15 +116,13 @@ const App = () => {
       <div className="container">
         <div className="video-container">
           <div className="video">
-            {stream && (
               <video
+                ref={myVideo}
                 playsInline
                 muted
-                ref={myVideo}
                 autoPlay
                 style={{ width: "300px" }}
               />
-            )}
           </div>
           <div className="video">
             {callAccepted && !callEnded ? (
