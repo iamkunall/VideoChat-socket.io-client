@@ -34,6 +34,7 @@ const App = () => {
       .getUserMedia({ video: true, audio: true })
       .then((currentStream) => {
         setStream(currentStream);
+
         myVideo.current.srcObject = currentStream;
       });
 
