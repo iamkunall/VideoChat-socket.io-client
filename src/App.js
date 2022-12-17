@@ -28,15 +28,23 @@ const App = () => {
 
   const connectionRef = useRef();
 
-  useEffect(() => {
-    // Setting up local video stream
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-
-        myVideo.current.srcObject = currentStream;
+  const handleInit = async () => {
+    try {
+      const currentStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
       });
+
+      setStream(currentStream);
+
+      myVideo.current.srcObject = currentStream;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleInit();
 
     socket.on("me", (id) => setMe(id));
 
